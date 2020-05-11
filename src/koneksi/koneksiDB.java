@@ -18,7 +18,7 @@ public class koneksiDB {
     
     public static Connection myDB()throws SQLException{
         try{
-            String url = "jdbc:mysql://localhost:3306/penjualanmotor";
+            String url = "jdbc:mysql://localhost:3306/sistem_informasi_penjualan_motor";
             String user = "root";
             String pass = "";
             
