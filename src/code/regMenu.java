@@ -151,8 +151,8 @@ public class regMenu extends javax.swing.JFrame {
     private void tbHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHomeMouseClicked
         // TODO add your handling code here:
         this.hide();
-        mHome rumah = new mHome();
-        rumah.setVisible(true);
+        mLogin login = new mLogin();
+        login.setVisible(true);
     }//GEN-LAST:event_tbHomeMouseClicked
 
     /**
