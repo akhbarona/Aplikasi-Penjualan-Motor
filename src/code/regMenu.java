@@ -5,6 +5,13 @@
  */
 package code;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import koneksi.koneksiDB;
+
 /**
  *
  * @author USER
@@ -31,15 +38,16 @@ public class regMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         tbHome = new javax.swing.JLabel();
+        tbHapus = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        isiEmail = new javax.swing.JTextField();
+        isiPassword = new javax.swing.JPasswordField();
+        isiUsername = new javax.swing.JTextField();
+        tbRegister = new javax.swing.JButton();
+        pilihPembeli = new javax.swing.JRadioButton();
+        pilihPegawai = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -63,6 +71,17 @@ public class regMenu extends javax.swing.JFrame {
             }
         });
 
+        tbHapus.setBackground(new java.awt.Color(255, 63, 52));
+        tbHapus.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tbHapus.setForeground(new java.awt.Color(255, 255, 255));
+        tbHapus.setText("Reset");
+        tbHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tbHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbHapusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,17 +89,18 @@ public class regMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(tbHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tbHome)
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tbHome, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tbHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 70));
@@ -103,40 +123,45 @@ public class regMenu extends javax.swing.JFrame {
         jLabel5.setText("Password");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 50));
 
-        jTextField1.setBackground(new java.awt.Color(241, 242, 246));
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 230, 50));
+        isiEmail.setBackground(new java.awt.Color(241, 242, 246));
+        isiEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(isiEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 230, 50));
 
-        jPasswordField1.setBackground(new java.awt.Color(241, 242, 246));
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 230, 50));
+        isiPassword.setBackground(new java.awt.Color(241, 242, 246));
+        isiPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(isiPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 230, 50));
 
-        jTextField2.setBackground(new java.awt.Color(241, 242, 246));
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 230, 50));
+        isiUsername.setBackground(new java.awt.Color(241, 242, 246));
+        isiUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(isiUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 230, 50));
 
-        jButton1.setBackground(new java.awt.Color(255, 63, 52));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Register");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 130, 50));
+        tbRegister.setBackground(new java.awt.Color(255, 63, 52));
+        tbRegister.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tbRegister.setForeground(new java.awt.Color(255, 255, 255));
+        tbRegister.setText("Register");
+        tbRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tbRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tbRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 130, 50));
 
-        jRadioButton1.setBackground(new java.awt.Color(15, 188, 249));
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("Pembeli");
-        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 100, 50));
+        pilihPembeli.setBackground(new java.awt.Color(15, 188, 249));
+        buttonGroup2.add(pilihPembeli);
+        pilihPembeli.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        pilihPembeli.setForeground(new java.awt.Color(255, 255, 255));
+        pilihPembeli.setText("Pembeli");
+        pilihPembeli.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(pilihPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 100, 50));
 
-        jRadioButton2.setBackground(new java.awt.Color(15, 188, 249));
-        buttonGroup2.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Pegawai");
-        jRadioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 110, 50));
+        pilihPegawai.setBackground(new java.awt.Color(15, 188, 249));
+        buttonGroup2.add(pilihPegawai);
+        pilihPegawai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        pilihPegawai.setForeground(new java.awt.Color(255, 255, 255));
+        pilihPegawai.setText("Pegawai");
+        pilihPegawai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(pilihPegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 110, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/gtrans1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 520, 210));
@@ -154,6 +179,54 @@ public class regMenu extends javax.swing.JFrame {
         mLogin login = new mLogin();
         login.setVisible(true);
     }//GEN-LAST:event_tbHomeMouseClicked
+
+    private void hapuslayar(){
+        isiUsername.setText("");
+        isiPassword.setText("");
+        isiEmail.setText("");
+    }
+    private void tbRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbRegisterActionPerformed
+        // TODO add your handling code here:
+        JFrame frame = new JFrame("Notifikasi");
+        if(isiUsername.getText().equals("")){
+            JOptionPane.showMessageDialog(frame, "Harap masukkan username!");
+            isiUsername.requestFocus();
+        }else if(isiPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(frame, "Password tidak boleh kosong");
+        }else if(pilihPegawai.isSelected()){
+            
+            try{
+                String sql = "INSERT INTO pegawai VALUES ('" + isiUsername.getText()+"','" + String.valueOf(isiPassword.getPassword()) + "','" + String.valueOf(isiEmail.getText()) + "')"; 
+                java.sql.Connection conn = (Connection)koneksi.koneksiDB.myDB();
+                java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
+                pstm.execute();
+                JOptionPane.showMessageDialog(frame, "Berhasil Memasukan Data!");
+                new mLogin().show();
+                this.dispose();
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }else if(pilihPembeli.isSelected()){
+            try{
+                String sql ="INSERT INTO pembeli VALUES ('" + isiUsername.getText()+"','" + String.valueOf(isiPassword.getPassword()) + "','" + String.valueOf(isiEmail.getText()) + "')";
+                java.sql.Connection conn = (Connection)koneksi.koneksiDB.myDB();
+                java.sql.PreparedStatement pstm = conn.prepareStatement(sql);
+                pstm.execute();
+                JOptionPane.showMessageDialog(frame, "Berhasil Memasukan Data!");
+                new mLogin().show();
+                this.dispose();
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(frame, "Pilih salah satu!");
+        }
+    }//GEN-LAST:event_tbRegisterActionPerformed
+
+    private void tbHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbHapusActionPerformed
+        // TODO add your handling code here:
+        hapuslayar();
+    }//GEN-LAST:event_tbHapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,7 +265,9 @@ public class regMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField isiEmail;
+    private javax.swing.JPasswordField isiPassword;
+    private javax.swing.JTextField isiUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -200,11 +275,10 @@ public class regMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JRadioButton pilihPegawai;
+    private javax.swing.JRadioButton pilihPembeli;
+    private javax.swing.JButton tbHapus;
     private javax.swing.JLabel tbHome;
+    private javax.swing.JButton tbRegister;
     // End of variables declaration//GEN-END:variables
 }
