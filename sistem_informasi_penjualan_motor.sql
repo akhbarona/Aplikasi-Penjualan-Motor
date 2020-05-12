@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Bulan Mei 2020 pada 16.51
+-- Waktu pembuatan: 12 Bulan Mei 2020 pada 14.11
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -59,18 +59,18 @@ INSERT INTO `daftarmotor` (`kode_motor`, `nama_motor`, `warna_motor`, `tahun`, `
 
 CREATE TABLE `pegawai` (
   `username_pegawai` char(20) NOT NULL,
-  `email_pegawai` varchar(20) NOT NULL,
-  `password_pegawai` varchar(9) NOT NULL
+  `password_pegawai` varchar(100) NOT NULL,
+  `email_pegawai` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pegawai`
 --
 
-INSERT INTO `pegawai` (`username_pegawai`, `email_pegawai`, `password_pegawai`) VALUES
-('AKHBARONA_SYANULIN', 'AKHBARONA@yahoo.com', '118140193'),
-('ANGGA_KURNIA', 'ANGGA.118140185@stud', '118140185'),
-('HASTIO_WAHYU', 'HASTIO.118140187@stu', '118140187');
+INSERT INTO `pegawai` (`username_pegawai`, `password_pegawai`, `email_pegawai`) VALUES
+('AKHBARONA_SYANULIN', '118140193', 'AKHBARONA@yahoo.com'),
+('ANGGA_KURNIA', '118140185', 'ANGGA.118140185@stud'),
+('HASTIO_WAHYU', '118140187', 'HASTIO.118140187@stu');
 
 -- --------------------------------------------------------
 
@@ -80,18 +80,19 @@ INSERT INTO `pegawai` (`username_pegawai`, `email_pegawai`, `password_pegawai`) 
 
 CREATE TABLE `pembeli` (
   `username_pembeli` varchar(20) NOT NULL,
-  `email_pembeli` varchar(20) NOT NULL,
-  `password_pembeli` varchar(9) NOT NULL
+  `password_pembeli` varchar(100) NOT NULL,
+  `email_pembeli` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pembeli`
 --
 
-INSERT INTO `pembeli` (`username_pembeli`, `email_pembeli`, `password_pembeli`) VALUES
-('Abdul_Hakim', 'muhammad@gmail.com', '1001'),
-('Aldy_Pubiangga', 'aldy@gmail.com', '1002'),
-('Alfha_Ridho', 'alfha@gmail.com', '1003');
+INSERT INTO `pembeli` (`username_pembeli`, `password_pembeli`, `email_pembeli`) VALUES
+('Abdul_Hakim', '1001', 'muhammad@gmail.com'),
+('Aldy_Pubiangga', '1002', 'aldy@gmail.com'),
+('Alfha_Ridho', '1003', 'alfha@gmail.com'),
+('Sultan', '1003', 'sultan@gmail.com');
 
 -- --------------------------------------------------------
 
