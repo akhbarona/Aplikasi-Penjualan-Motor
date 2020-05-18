@@ -208,6 +208,7 @@ public class mLogin extends javax.swing.JFrame {
                 if(res.next()){
                     if(txtPassword.getText().equals(res.getString("password_pegawai"))){
                         JOptionPane.showMessageDialog(rootPane, "Telah Berhasil Login!");
+                        new mLoginPegawai().show();
                         //Menu Admin new menu_pegawai().show();
                         this.dispose();
                     }else{
@@ -223,7 +224,7 @@ public class mLogin extends javax.swing.JFrame {
             }catch(SQLException ex){
                 System.out.println("Kesalahan"+ex.getMessage());
             }
-        }else if(LPegawai.isSelected()){
+        }else if(LPembeli.isSelected()){
             try{
                 String sql ="SELECT * FROM pembeli WHERE "+"username_pembeli='"+txtUsername.getText()+"'";
                 java.sql.Connection conn = (Connection)koneksi.koneksiDB.myDB();
@@ -232,6 +233,7 @@ public class mLogin extends javax.swing.JFrame {
                 if(res.next()){
                     if(txtPassword.getText().equals(res.getString("password_pembeli"))){
                         JOptionPane.showMessageDialog(rootPane, "Telah Berhasil Login!");
+                        new mLoginPembeli().show();
                         //Menu Pengunjung new menu_pembeli().show();
                         this.dispose();
                     }else{
